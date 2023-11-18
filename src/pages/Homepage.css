@@ -1,13 +1,36 @@
-article {
-  position: relative;
+.homepage-background {
+  height: 100%;
+  width: 100%;
+  background-image: url("../assets/wave-haikei-phone.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #ececec;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  row-gap: 100px;
+}
+
+.homepage-background section {
+  margin: 0 20px;
+}
+
+.homepage-background .hp-title {
+  margin-top: 50px;
+  color: #ececec;
+}
+
+.hp-title h1 {
+  font-size: 32px;
 }
 
 body.blur > #root > article > *:not(.popup-container) {
   filter: blur(5px);
+}
+
+.popup-container {
+  position: absolute;
 }
 
 .popup-styling {

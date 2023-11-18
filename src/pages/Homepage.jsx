@@ -10,7 +10,7 @@ const HomePage = () => {
 
   return (
     <article className="homepage-background">
-      <section>
+      <section className="hp-title">
         <h1>Track your finances</h1>
         <p>Forget the excel sheets!</p>
         <p>

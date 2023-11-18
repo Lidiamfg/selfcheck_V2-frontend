@@ -30,10 +30,18 @@
   padding: 0;
 }
 
-.homepage-background {
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+  background-color: #efefef;
+  width: 100vw;
+}
+
+/*PC SCREEN
+/* .homepage-background {
   min-height: 100vh;
   width: 100%;
   background-image: url("./assets/wave-haikei.svg");
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
