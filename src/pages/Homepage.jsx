@@ -1,7 +1,13 @@
+import { useState } from "react";
 import SignupLogin from "../components/Signup_Login/Signup_Login";
 import "./Homepage.css";
 
 const HomePage = () => {
+  const handleSignupPopup = (content) => {
+    setShowPopup(true);
+    setPopupContent(content);
+  };
+
   return (
     <article className="homepage-background">
       <section>
@@ -12,9 +18,7 @@ const HomePage = () => {
           finances.
         </p>
       </section>
-      <section>
-        <SignupLogin />
-      </section>
+      <SignupLogin />
     </article>
   );
 };
