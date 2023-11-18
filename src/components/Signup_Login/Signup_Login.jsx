@@ -325,7 +325,8 @@ const SignupLogin = () => {
         {showPopup && (
           <div className="popup">
             <div className="popup-content">
-              <span
+              <p>{popupContent}</p>
+              <button
                 className="close"
                 onClick={() => {
                   setShowPopup(false);
@@ -334,9 +335,8 @@ const SignupLogin = () => {
                   }
                 }}
               >
-                &times;
-              </span>
-              <p>{popupContent}</p>
+                Continue
+              </button>
             </div>
           </div>
         )}
