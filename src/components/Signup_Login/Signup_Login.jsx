@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const SignupLogin = () => {
+  const navigate = useNavigate();
+
   //HANDLE FORM ANIMATION
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [formPosition, setFormPosition] = useState(0);
@@ -123,6 +125,36 @@ const SignupLogin = () => {
     }
   };
 
+  //FETCH USER YEARS
+  const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
+  const token = localStorage.getItem("authToken");
+
+  const fetchYears = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/years/user/${currentUser}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        const allYears = await response.json();
+        console.log("chicorita", allYears.length);
+        if (allYears.length > 0) {
+          navigate("/dashboard");
+        } else {
+          navigate("/initial-setting");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //HANDLE LOGIN SUBMIT
   const { handleLogin } = useContext(AuthContext);
 
@@ -159,9 +191,15 @@ const SignupLogin = () => {
     }
   };
 
+  useEffect(() => {
+    if (currentUser) {
+      fetchYears();
+    }
+  }, [currentUser]);
+
   return (
     <>
-      <section className="wrapper">
+      <article className="wrapper">
         <div className="title-text">
           <div
             className={`title login`}
@@ -318,8 +356,8 @@ const SignupLogin = () => {
             </form>
           </div>
         </div>
-      </section>
-      <section
+      </article>
+      <article
         className={`popup-container ${showPopup ? "popup-styling" : ""}`}
       >
         {showPopup && (
@@ -340,7 +378,7 @@ const SignupLogin = () => {
             </div>
           </div>
         )}
-      </section>
+      </article>
     </>
   );
 };

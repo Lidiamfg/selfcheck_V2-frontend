@@ -1,7 +1,20 @@
+.logo {
+  background-color: var(--bg-dark-blue);
+}
+
+.mobile-logo {
+  height: 30px;
+  width: 138px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  margin: 20px 0 0 20px;
+}
+
 .homepage-background {
   height: 100%;
   width: 100%;
-  background-image: url("../assets/wave-haikei-phone.svg");
+  background-image: url("../../assets/wave-haikei-phone.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #ececec;
@@ -9,27 +22,48 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 100px;
 }
 
-.homepage-background section {
-  margin: 0 20px;
+.homepage-background article {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .homepage-background .hp-title {
-  margin-top: 50px;
+  width: 320px;
+  margin-top: 25px;
   color: #ececec;
+  font-size: 16px;
 }
 
 .hp-title h1 {
-  font-size: 32px;
+  font-size: 36px;
+  margin-bottom: 10px;
+  position: relative;
+  text-align: right;
 }
 
-body.blur > #root > article {
+.hp-title h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 4px;
+  background-color: var(--bg-pale-blue);
+}
+
+.hp-title p {
+  margin-left: 20px;
+  text-align: right;
+  padding-block: 5px;
+}
+
+body.blur > #root > section {
   position: relative; /* Ensure the pseudo-element is positioned relative to the article */
 }
 
-body.blur > #root > article::before {
+body.blur > #root > section::before {
   content: "";
   position: absolute;
   top: 0;
@@ -42,7 +76,7 @@ body.blur > #root > article::before {
   filter: blur(10px); /* Apply the blur effect */
 }
 
-body.blur > #root > article > :not(.popup-container) {
+body.blur > #root > section > :not(.popup-container) {
   filter: blur(
     10px
   ); /* Apply the blur effect to the article's children excluding .popup-container */
