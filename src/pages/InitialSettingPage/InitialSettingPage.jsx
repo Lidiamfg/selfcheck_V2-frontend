@@ -29,7 +29,10 @@ const InitialSettingPage = () => {
             "Content-Type": "application/json",
             authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            user: `${currentUser}`,
+            number,
+          }),
         }
       );
       if (response.ok) {
@@ -65,8 +68,10 @@ const InitialSettingPage = () => {
   };
 
   useEffect(() => {
-    fetchYears();
-  }, [currentUser]);
+    if (currentUser) {
+      fetchYears();
+    }
+  }, []);
 
   const handleCreateYear = () => {
     const yearExists = years.some(
