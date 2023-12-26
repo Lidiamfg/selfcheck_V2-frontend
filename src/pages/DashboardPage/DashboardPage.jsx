@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import IncomeBarChart from "./Charts/IncomeBarChart";
+import ExpenseBarChart from "./Charts/ExpenseBarChart";
 
 const DashboardPage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -11,6 +13,9 @@ const DashboardPage = () => {
   const [expenses, setExpenses] = useState([]);
   const [budgets, setBudgets] = useState([]);
   const [selectedYear, setSelectedYear] = useState(null);
+  let totalIncomes = 0;
+  let totalExpenses = 0;
+  let totalBudgets = 0;
 
   //FETCH USER YEARS
   const fetchYears = async () => {
@@ -63,6 +68,7 @@ const DashboardPage = () => {
         });
         console.log("Incomes filtrados", filteredIncomes);
         setIncomes(filteredIncomes);
+        /* DataHandling(filteredIncomes); */
       }
     } catch (error) {
       console.log(error);
@@ -145,7 +151,6 @@ const DashboardPage = () => {
     <section>
       <div>
         <h1>DASHBOARD</h1>
-        <p>{selectedYear}</p>
         <select
           name="years"
           onChange={(event) => {
@@ -163,11 +168,31 @@ const DashboardPage = () => {
             })}
         </select>
       </div>
-      <article>
-        <div>
+      <article className="dash-container">
+        <div className="total-numbers">
+          <h3>Annual Budget</h3>
+          <div>
+            <p>Total income</p>
+            {incomes.forEach((income) => (totalIncomes += income.amount))}
+            <p>{totalIncomes}</p>
+          </div>
+          <div>
+            <p>Total expenses</p>
+            {expenses.forEach((expense) => (totalExpenses += expense.amount))}
+            <p>{totalExpenses}</p>
+          </div>
+          <div>
+            <p>Total budgeted</p>
+            {budgets.forEach((budget) => (totalBudgets += budget.amount))}
+            <p>{totalBudgets}</p>
+          </div>
           {incomes.map((income) => (
             <div key={income._id}>{income.amount}</div>
           ))}
+        </div>
+        <div className="graphs">
+          <IncomeBarChart incomes={incomes} />
+          <ExpenseBarChart expenses={expenses} />
         </div>
       </article>
     </section>
